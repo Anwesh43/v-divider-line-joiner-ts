@@ -213,3 +213,25 @@ class VDividerLineJoiner {
         this.curr.startUpdating(cb)
     }
 }
+
+class Renderer {
+
+    vdlj : VDividerLineJoiner = new VDividerLineJoiner()
+    animator : Animator = new Animator()
+
+    render(context : CanvasRenderingContext2D) {
+        this.vdlj.draw(context)
+    }
+
+    handleTap(cb : Function) {
+        this.vdlj.startUpdating(() => {
+            this.animator.start(() => {
+                cb()
+                this.vdlj.update(() => {
+                    this.animator.stop()
+                    cb()
+                })
+            })
+        })
+    }
+}
