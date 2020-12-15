@@ -57,8 +57,8 @@ class DrawingUtil {
                 const sc1k : number = ScaleUtil.divideScale(sc1, k, parts)
                 const sc2k : number = ScaleUtil.divideScale(sc2, k, parts)
                 context.save()
-                context.translate(xGap * k, 0)
-                DrawingUtil.drawEndingLine(context, 0, -xGap * k, sc1k, sc2k)
+                context.translate(xGap * (k + 1), 0)
+                DrawingUtil.drawEndingLine(context, 0, -xGap * (k + 1), sc1k, sc2k)
                 context.restore()
             }
             context.restore()
@@ -205,7 +205,7 @@ class VDividerLineJoiner {
     }
 
     update(cb : Function) {
-        this.curr.update(() => () => {
+        this.curr.update(() => {
             this.curr = this.curr.getNext(this.dir, () => {
                 this.dir *= -1
             })
